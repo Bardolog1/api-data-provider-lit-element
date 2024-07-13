@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <div id="demo"></div>
+
+  <script type="module">
+    import { html, render } from 'lit';
+    import '../api-data-provider.js';
+
+
+
+    render(
+      html`
+        <api-data-provider
+          id="dp"
+          protocol="https"
+          host="pokeapi.co/api/v2"
+          path ="pokemon"
+        ></api-data-provider>
+      `,
+      document.querySelector('#demo')
+    );
+
+    const dp = document.querySelector('#dp');
+      dp.addEventListener('api-dp-success', (e)=>{
+      console.log(e.detail.data);
+    });
+    dp.generateRequest();
+
+
+  </script>
+</body>
+</html>
